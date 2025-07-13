@@ -1,5 +1,7 @@
+
 "use client";
 
+import Link from "next/link";
 import { MainLayout } from "@/components/main-layout";
 import { useBackpack } from "@/contexts/backpack";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,7 +17,7 @@ export default function BackpackPage() {
       <div className="flex flex-col gap-6">
         <div>
           <h1 className="text-3xl font-bold font-headline tracking-tight">My Backpack</h1>
-          <p className="text-muted-foreground">All your saved materials in one place.</p>
+          <p className="text-muted-foreground">All your saved materials in one place. Click on a card to view.</p>
         </div>
 
         {backpackItems.length > 0 ? (
@@ -38,25 +40,33 @@ export default function BackpackPage() {
 function BackpackItemCard({ item }: { item: Material }) {
   const { removeFromBackpack } = useBackpack();
 
+  const handleRemove = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    removeFromBackpack(item.id);
+  }
+
   return (
-    <Card className="flex flex-col">
-      <CardHeader>
-        <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-        <CardDescription>{item.subject} - Sem {item.semester}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <p className="text-sm text-muted-foreground">{item.description}</p>
-      </CardContent>
-      <CardFooter>
-        <Button 
-          variant="destructive"
-          className="w-full" 
-          onClick={() => removeFromBackpack(item.id)}
-        >
-          <Trash2 />
-          <span>Remove</span>
-        </Button>
-      </CardFooter>
-    </Card>
+    <Link href={`/materials/${item.id}`} className="block hover:shadow-lg transition-shadow rounded-lg">
+      <Card className="flex flex-col h-full">
+        <CardHeader>
+          <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
+          <CardDescription>{item.subject} - Sem {item.semester}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow">
+          <p className="text-sm text-muted-foreground">{item.description}</p>
+        </CardContent>
+        <CardFooter>
+          <Button 
+            variant="destructive"
+            className="w-full" 
+            onClick={handleRemove}
+          >
+            <Trash2 />
+            <span>Remove</span>
+          </Button>
+        </CardFooter>
+      </Card>
+    </Link>
   )
 }

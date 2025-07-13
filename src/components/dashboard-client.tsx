@@ -1,7 +1,7 @@
+
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -114,27 +114,25 @@ function MaterialCard({ item }: { item: Material }) {
   }
 
   return (
-    <Link href={`/materials/${item.id}`} className="block hover:shadow-lg transition-shadow rounded-lg">
-      <Card className="flex flex-col h-full">
-        <CardHeader>
-          <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-          <CardDescription>{item.subject} - Sem {item.semester}</CardDescription>
-        </CardHeader>
-        <CardContent className="flex-grow">
-          <p className="text-sm text-muted-foreground">{item.description}</p>
-        </CardContent>
-        <CardFooter>
-          <Button 
-            className="w-full" 
-            onClick={handleAddToBackpack}
-            disabled={isInBackpack}
-            variant={isInBackpack ? "secondary" : "default"}
-          >
-            {isInBackpack ? <CheckCircle /> : <BookPlus />}
-            <span>{isInBackpack ? 'In Backpack' : 'Add to Backpack'}</span>
-          </Button>
-        </CardFooter>
-      </Card>
-    </Link>
+    <Card className="flex flex-col h-full">
+      <CardHeader>
+        <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
+        <CardDescription>{item.subject} - Sem {item.semester}</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-grow">
+        <p className="text-sm text-muted-foreground">{item.description}</p>
+      </CardContent>
+      <CardFooter>
+        <Button 
+          className="w-full" 
+          onClick={handleAddToBackpack}
+          disabled={isInBackpack}
+          variant={isInBackpack ? "secondary" : "default"}
+        >
+          {isInBackpack ? <CheckCircle /> : <BookPlus />}
+          <span>{isInBackpack ? 'In Backpack' : 'Add to Backpack'}</span>
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }
