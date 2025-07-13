@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   Select,
   SelectContent,
@@ -106,26 +107,34 @@ function MaterialCard({ item }: { item: Material }) {
   const { addToBackpack, isItemInBackpack } = useBackpack();
   const isInBackpack = isItemInBackpack(item.id);
 
+  const handleAddToBackpack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToBackpack(item);
+  }
+
   return (
-    <Card className="flex flex-col">
-      <CardHeader>
-        <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-        <CardDescription>{item.subject} - Sem {item.semester}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <p className="text-sm text-muted-foreground">{item.description}</p>
-      </CardContent>
-      <CardFooter>
-        <Button 
-          className="w-full" 
-          onClick={() => addToBackpack(item)} 
-          disabled={isInBackpack}
-          variant={isInBackpack ? "secondary" : "default"}
-        >
-          {isInBackpack ? <CheckCircle /> : <BookPlus />}
-          <span>{isInBackpack ? 'In Backpack' : 'Add to Backpack'}</span>
-        </Button>
-      </CardFooter>
-    </Card>
+    <Link href={`/materials/${item.id}`} className="block hover:shadow-lg transition-shadow rounded-lg">
+      <Card className="flex flex-col h-full">
+        <CardHeader>
+          <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
+          <CardDescription>{item.subject} - Sem {item.semester}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex-grow">
+          <p className="text-sm text-muted-foreground">{item.description}</p>
+        </CardContent>
+        <CardFooter>
+          <Button 
+            className="w-full" 
+            onClick={handleAddToBackpack}
+            disabled={isInBackpack}
+            variant={isInBackpack ? "secondary" : "default"}
+          >
+            {isInBackpack ? <CheckCircle /> : <BookPlus />}
+            <span>{isInBackpack ? 'In Backpack' : 'Add to Backpack'}</span>
+          </Button>
+        </CardFooter>
+      </Card>
+    </Link>
   )
 }
