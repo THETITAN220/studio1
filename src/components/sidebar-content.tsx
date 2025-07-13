@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -7,7 +8,6 @@ import {
   Home,
   User,
   ShoppingBag,
-  Bot,
   PanelLeft,
   Moon,
   Sun,
@@ -33,7 +33,6 @@ export function SidebarContent() {
   const menuItems = [
     { href: "/", label: "Dashboard", icon: Home },
     { href: "/backpack", label: "My Backpack", icon: ShoppingBag },
-    { href: "/viewer", label: "PDF Chatbot", icon: Bot },
   ];
 
   return (
