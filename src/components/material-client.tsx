@@ -132,7 +132,6 @@ export function MaterialClient({ material }: { material: Material }) {
   };
 
   const documentTextContent = sampleContent[material.type].trim();
-  const textAsPdfDataUri = `data:application/pdf;base64,${btoa(documentTextContent)}`;
 
   const handleQuestionSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -148,7 +147,7 @@ export function MaterialClient({ material }: { material: Material }) {
 
     try {
       const result = await pdfChatbot({
-        pdfDataUri: textAsPdfDataUri,
+        documentContent: documentTextContent,
         question: question,
         geminiApiKey: apiKey,
       });
