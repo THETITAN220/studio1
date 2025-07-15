@@ -6,7 +6,7 @@ To get started, take a look at src/app/page.tsx.
 
 Firebase link : https://studio.firebase.google.com/studio-3147399203
 
-## NOTE: Please do run `npm install`
+<b> NOTE: Please do run `npm install` before running the project </b>
 
 <a href="https://studio.firebase.google.com/import?url=https%3A%2F%2Fgithub.com%2FTHETITAN220%2Fstudio1">
   <picture>
